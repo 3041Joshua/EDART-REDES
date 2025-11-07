@@ -1,0 +1,293 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>ESCUELA DE ARTE DE TLAXCALA - REDES</title>
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <script src="https://kit.fontawesome.com/a076d05399.js" crossorigin="anonymous"></script>
+  <script src="https://cdn.jsdelivr.net/npm/qrcode/build/qrcode.min.js"></script>
+
+  <style>
+    :root {
+      --azul: #000000;
+      --azul-claro: #0066ff;
+      --gris-claro: #f3f5f8;
+      --texto: #333;
+      --sombra: rgba(0, 0, 0, 0.1);
+    }
+
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+      font-family: 'Poppins', sans-serif;
+    }
+
+    body {
+      background-color: #ffffff;
+      color: var(--texto);
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      min-height: 100vh;
+    }
+
+    header {
+      width: 100%;
+      background: white;
+      border-bottom: 2px solid var(--gris-claro);
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 20px 60px;
+      box-shadow: 0 3px 6px var(--sombra);
+      position: sticky;
+      top: 0;
+      z-index: 10;
+    }
+
+    .logo {
+      display: flex;
+      align-items: center;
+      gap: 15px;
+      cursor: pointer;
+      transition: transform 0.2s;
+      position: relative;
+    }
+
+    .logo:hover {
+      transform: scale(1.02);
+    }
+
+    .logo img {
+      height: 60px;
+      width: auto;
+      border-radius: 10px;
+    }
+
+    .logo h1 {
+      font-size: 1.5rem;
+      font-weight: 700;
+      color: var(--azul);
+      display: flex;
+      align-items: center;
+      gap: 10px;
+    }
+
+    /* Contenedor del QR junto al nombre */
+    .qr-inline {
+      display: none;
+      margin-left: 15px;
+      background: white;
+      border: 2px solid var(--gris-claro);
+      border-radius: 12px;
+      padding: 10px;
+      box-shadow: 0 3px 8px rgba(0, 0, 0, 0.15);
+    }
+
+    .qr-inline canvas {
+      width: 80px;
+      height: 80px;
+    }
+
+    .logo.show-qr .qr-inline {
+      display: block;
+    }
+
+    main {
+      width: 90%;
+      max-width: 1200px;
+      text-align: center;
+      padding: 60px 20px;
+    }
+
+    main h2 {
+      font-size: 2rem;
+      color: var(--azul);
+      margin-bottom: 10px;
+    }
+
+    main p {
+      color: #555;
+      font-size: 1.1rem;
+      margin-bottom: 50px;
+    }
+
+    .redes-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+      gap: 30px;
+      justify-items: center;
+    }
+
+    .tarjeta {
+      background: white;
+      border: 1px solid #e0e0e0;
+      border-radius: 20px;
+      box-shadow: 0 5px 10px var(--sombra);
+      width: 100%;
+      max-width: 300px;
+      padding: 35px 25px;
+      text-align: center;
+      text-decoration: none;
+      color: var(--texto);
+      transition: all 0.3s ease;
+    }
+
+    .tarjeta:hover {
+      transform: translateY(-8px);
+      box-shadow: 0 10px 25px rgba(0, 0, 0, 0.15);
+    }
+
+    .tarjeta i {
+      font-size: 2.8rem;
+      margin-bottom: 15px;
+      transition: transform 0.3s;
+    }
+
+    .tarjeta:hover i {
+      transform: scale(1.15);
+    }
+
+    /* ==== AQUÍ VIENE EL CAMBIO QUE PEDISTE ==== */
+    .tarjeta h3 {
+      font-size: 1.3rem;
+      color: var(--azul);
+      margin-bottom: 8px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 8px;
+    }
+
+    .tarjeta h3 img.icono {
+      width: 28px;
+      height: 28px;
+      object-fit: contain;
+      margin: 0;
+    }
+    /* ========================================= */
+
+    .tarjeta p {
+      font-size: 0.95rem;
+      color: #555;
+    }
+
+    .tarjeta img {
+      width: 100%;
+      height: 140px;
+      object-fit: cover;
+      border-radius: 12px;
+      margin-bottom: 15px;
+    }
+
+    .facebook i { color: #1877f2; }
+    .instagram i { color: #e4405f; }
+    .youtube i { color: #ff0000; }
+    .tiktok i { color: #000000; }
+
+    footer {
+      margin-top: 60px;
+      padding: 20px;
+      font-size: 0.9rem;
+      color: #777;
+      text-align: center;
+      border-top: 1px solid #eee;
+      width: 100%;
+    }
+
+    @media (max-width: 768px) {
+      header {
+        flex-direction: column;
+        gap: 10px;
+        text-align: center;
+      }
+      .logo {
+        flex-direction: column;
+      }
+      .qr-inline {
+        margin-left: 0;
+        margin-top: 10px;
+      }
+    }
+  </style>
+</head>
+<body>
+
+<header>
+  <div class="logo" id="logo">
+    <img src="LOGO.jpg" alt="Logo de la escuela">
+    <h1>ESCUELA DE ARTES DE TLAXCALA (EDART)</h1>
+
+    <!-- Aquí se genera el QR al lado del nombre -->
+    <div class="qr-inline" id="qrInline">
+      <canvas id="qrCanvas"></canvas>
+    </div>
+  </div>
+</header>
+
+<main>
+  <h2>Redes Sociales Oficiales</h2>
+  <p>SIGUE NUESTRAS REDES SOCIALES OFICIALES DE LA ESCUELA DE ARTE DE TLAXCALA (EDART)</p>
+
+  <div class="redes-grid">
+
+    <a href="https://www.facebook.com/share/1AQxa7yXYg/" target="_blank" class="tarjeta facebook">
+      <img src="1.jpg" alt="Facebook EDART">
+      <i class="fab fa-facebook-f"></i>
+      <h3>Facebook <img src="Face.png" alt="icono Facebook" class="icono"></h3>
+      <p>SIGUE A LA ESCUELA DE ARTES DE TLAXCALA EN SU FACEBOOK OFICIAL</p>
+    </a>
+
+    <a href="https://www.instagram.com/edart_escuela?igsh=b2s1YnB3azdna2o3" target="_blank" class="tarjeta instagram">
+      <img src="2.jpg" alt="Instagram EDART">
+      <i class="fab fa-instagram"></i>
+      <h3>Instagram <img src="insta.png" alt="icono Instagram" class="icono"></h3>
+      <p>SIGUE A LA ESCUELA DE ARTES DE TLAXCALA EN SU INSTAGRAM OFICIAL</p>
+    </a>
+
+    <a href="https://www.tiktok.com/@escueladeartedetlaxcala?_r=1&_t=ZS-91B63KfKl0S" target="_blank" class="tarjeta youtube">
+      <img src="3.jpg" alt="TikTok EDART">
+      <i class="fab fa-tiktok"></i>
+      <h3>TikTok <img src="tisto.png" alt="icono TikTok" class="icono"></h3>
+      <p>SIGUE A LA ESCUELA DE ARTES DE TLAXCALA EN SU TIKTOK OFICIAL</p>
+    </a>
+
+    <a href="#" class="tarjeta youtube">
+      <img src="4.jpg" alt="Página web EDART">
+      <i class="fas fa-globe"></i>
+      <h3>Página Web Oficial <img src="LOGO.jpg" alt="icono Web" class="icono"></h3>
+      <p>PRÓXIMAMENTE</p>
+    </a>
+
+  </div>
+</main>
+
+<footer>
+  © 2025 JSProgament | Todos los derechos reservados
+</footer>
+
+<script>
+  const logo = document.getElementById('logo');
+  const qrInline = document.getElementById('qrInline');
+  const qrCanvas = document.getElementById('qrCanvas');
+  let qrVisible = false;
+
+  logo.addEventListener('click', () => {
+    const currentURL = window.location.href;
+    if (!qrVisible) {
+      QRCode.toCanvas(qrCanvas, currentURL, { width: 100, margin: 1 }, function (error) {
+        if (error) console.error(error);
+      });
+      logo.classList.add('show-qr');
+      qrVisible = true;
+    } else {
+      logo.classList.remove('show-qr');
+      qrVisible = false;
+    }
+  });
+</script>
+
+</body>
+</html>
